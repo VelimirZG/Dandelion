@@ -19,7 +19,7 @@ In order to interact with smart contract, first it needs to be deployed.
 Once we have contract deployed, use the Account ID where it was deployed to set an environment variable to make it easy to copy and paste(alternatively you can use your own account ID):
 
 export NEARID=AccountID\
-   for example: ```export NEARID=dev-1661410404417-826099944309945```
+   for example: ```export NEARID=dev-1661857720366-11013681566272```
 
 ### Interact with contract
 
