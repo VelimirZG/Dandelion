@@ -11,7 +11,7 @@ In order to interact with smart contract, first it needs to be deployed.
 2. Change directory to Dandelion
        ```cd dandelion```
 2. Install dependencies\
-       ```yarn install```
+       ```yarn install```\
        ```yarn build```
 3. Deploy the contract\
    ```near dev-deploy -f --wasmFile out/main.wasm```
