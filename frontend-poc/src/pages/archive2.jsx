@@ -3,14 +3,28 @@ import {withRouter} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { HeartFill } from 'react-bootstrap-icons';
 import Dropdown from 'react-bootstrap/Dropdown';
+import 'regenerator-runtime/runtime'
 
 import './archive2.css';
+import { create_idea, login } from "../assets/near/utils";
 
 const Archive2 = () => {
-
+  // React.useEffect(
+  //   () => {
+  //     login()
+  //     create_idea().then((response)=>
+  //     console.log('response from create idea: ', response))
+      
+  //   }, [] )
+  
   return (
     <div className="container-fluid">
       <div className="row">
+      <button onClick={()=>login()}>Sign in</button>
+      <button className="link" style={{ float: 'right' }} onClick={()=>create_idea().then((response)=>
+      console.log('response from create idea: ', response))}>
+        Sign out
+      </button>
         <div className="col-12 mt-3">
           <div className="card">
               <div className="card-body d-flex mt-auto flex-sm-column flex-lg-row row">
