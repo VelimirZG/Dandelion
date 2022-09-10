@@ -1,12 +1,14 @@
 import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
 import getConfig from './config'
 
-const nearConfig = getConfig(process.env.NODE_ENV || 'development')
+const nearConfig = getConfig('development');
+console.log('CONFIG: ', nearConfig);
 
 // Initialize contract & set global variables
 export async function initContract() {
-  // Initialize connection to the NEAR testnet
-  const near = await connect(Object.assign({ deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() } }, nearConfig))
+  console.log('OBJECT ASSIGN: ', Object.assign({ keyStore: new keyStores.BrowserLocalStorageKeyStore() }, nearConfig));
+  const near = await connect(Object.assign({ keyStore: new keyStores.BrowserLocalStorageKeyStore() }, nearConfig))
+  console.log('NEAR: ', near);
 
   // Initializing Wallet based Account. It can work with NEAR testnet wallet that
   // is hosted at https://wallet.testnet.near.org
@@ -18,7 +20,7 @@ export async function initContract() {
   // Initializing our contract APIs by contract name and configuration
   window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
     // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['ideas_for_owner'],
+    viewMethods: ['ideas_for_owner', 'idea_info'],
     // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ['create_idea'],
   })
@@ -40,12 +42,18 @@ export function login() {
 
 export async function create_idea(){
   let response = await window.contract.create_idea({
-    args:{idea_id: "Proba 9", receiver_id: window.accountId, metadata: { title: "Treća ideja", description: "Opis ideje", picture_url: "https://bafybeidl4hjbpdr6u6xvlrizwxbrfcyqurzvcnn5xoilmcqbxfbdwrmp5m.ipfs.dweb.link/", team: "Velimir Zagar"}}
+    args: {idea_id: "Proba 13", receiver_id: "proba.proba8.testnet", investment_goal: 2,metadata: { title: "Treća ideja", description: "Opis ideje", picture_url: "https://bafybeidl4hjbpdr6u6xvlrizwxbrfcyqurzvcnn5xoilmcqbxfbdwrmp5m.ipfs.dweb.link/", team: "Velimir Zagar"}},
+    contractId: 'proba.proba8.testnet'
   })
   return response
 }
 
-export async function get_greeting(){
-  let greeting = await window.contract.get_greeting()
-  return greeting
+export async function ideas_for_owner(){
+  const owner_ideas = await window.contract.ideas_for_owner({account_id: "proba.proba8.testnet"})
+  return owner_ideas
+}
+
+export async function idea(){
+  const idea = await window.contract.idea_info({idea_id: "Proba 12"})
+  return idea
 }
