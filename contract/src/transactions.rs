@@ -36,8 +36,10 @@ impl Contract {
 
     // Send the money to the owner of the Idea if the goal has been reached
     if invested_so_far >= (&self.investment_goal.get(&idea_id).unwrap()*ONE_NEAR){
-      Promise::new(self.owner_id.clone()).transfer(invested_so_far);
-      log!("Investment goal for {} has been reached! You invested a total of {}", idea_id.clone(), invested_so_far);
+      log!("ovo je ispis od idea.info:{:?} ", self.idea_info(idea_id.clone()).unwrap());
+      //TODO to be implemented: get the owner of the idea:
+      //Promise::new(self.owner_id.clone()).transfer(invested_so_far);
+      // log!("Investment goal for {} has been reached! You invested a total of {}", idea_id.clone(), invested_so_far);
     }
     
     log!("Thank you for investing to {}! Total invested so far: {}", idea_id.clone(), invested_so_far);

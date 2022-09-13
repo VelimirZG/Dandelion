@@ -1,4 +1,10 @@
+use std::convert::TryInto;
+
+
 use crate::*;
+use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
+
+use near_sdk::log;
 
 #[near_bindgen]
 impl Contract {
@@ -62,6 +68,16 @@ impl Contract {
         self.investments.len()
     }
 
+    pub fn get_investment_goal(&self, idea_id: IdeaId) ->i128{
+  
+      if self.investment_goal.get(&idea_id).is_none(){
+        log!("No such idea");
+        return -1;
+      } else {
+          return self.investment_goal.get(&idea_id).unwrap().try_into().unwrap();
+      };
+    }
+
     // Public - paginate through all investments on the contract
     pub fn get_investments(&self, from_index: Option<U128>, limit: Option<u64>) -> Vec<Investment> {
         //where to start pagination - if we have a from_index, we'll use that - otherwise start from 0 index
@@ -78,4 +94,35 @@ impl Contract {
           .collect()
     }
 
-    }
+
+
+     pub fn get_all_ideas(&self) -> Vec<JsonIdea>{
+  
+          let all_idea_id=self.idea_metadata_by_id.keys_as_vector().to_vec();
+          let mut allideas:Vec<JsonIdea>=Vec::new();
+          for i in &all_idea_id{
+            
+            allideas.push(self.idea_info(i.to_string()).unwrap());
+           
+          }
+          return allideas;
+  }
+
+  }
+
+
+    // #[near_bindgen]
+    // impl Contract {
+    //     pub fn get_tags(&self, idea_id: &IdeaId) -> Vec<String> {
+    //       log!("tagovi:{:?}",self.tags_per_idea.get(idea_id).unwrap().to_vec());
+    //         let tags = self.tags_per_idea.get(idea_id).unwrap_or_else(|| {
+                
+    //             UnorderedSet::new(b"l")
+    //         });
+    //         tags.to_vec()
+    //     }
+
+        
+    // }
+
+    

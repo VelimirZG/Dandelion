@@ -20,6 +20,7 @@ impl IdeaCore for Contract {
             Some(JsonIdea {
                 idea_id,
                 owner_id: idea.owner_id,
+                // tag:idea.tag,
                 metadata,
             })
         } else { //if there wasn't an idea ID in the ideas_by_id collection,  return None

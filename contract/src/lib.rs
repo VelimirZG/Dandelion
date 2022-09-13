@@ -26,13 +26,16 @@ mod transactions;
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
 pub struct Contract {
     //contract owner
-    pub owner_id: AccountId,
+    pub contract_owner_id: AccountId,
+   
 
     //keeps track of the idea struct for a given idea ID
     pub ideas_by_id: LookupMap<IdeaId, Idea>,
 
     //keeps track of all the idea IDs for a given account
     pub ideas_per_owner: LookupMap<AccountId, UnorderedSet<IdeaId>>,
+
+    // pub tags_per_idea: UnorderedMap<IdeaId, UnorderedSet<Tag>>,
 
     //keeps track of the idea metadata for a given idea ID
     pub idea_metadata_by_id: UnorderedMap<IdeaId, IdeaMetadata>,
@@ -52,9 +55,11 @@ pub struct Contract {
 pub enum StorageKey {
     IdeasById,
     IdeasPerOwner,
+    // TagsPerIdea,
     IdeaMetadataById,
     IdeaContractMetadata,
-    IdeaPerOwnerInner { account_id_hash: CryptoHash }
+    IdeaPerOwnerInner { account_id_hash: CryptoHash },
+    // TagsPerIdeaInner
 }
 
 
@@ -64,10 +69,10 @@ impl Contract {
         initialization function 
     */
     #[init]
-    pub fn new_default_meta(owner_id: AccountId) -> Self {
+    pub fn new_default_meta(contract_owner_id: AccountId) -> Self {
         //calls the other function "new: with some default metadata and the owner_id passed in 
         Self::new(
-            owner_id,
+            contract_owner_id,
             IdeaContractMetadata {
                 spec: "Dandelion-1.0.0".to_string(),
                 name: "Dandelion contract".to_string(),
@@ -76,19 +81,20 @@ impl Contract {
     }
 
     #[init]
-    pub fn new(owner_id: AccountId, metadata: IdeaContractMetadata) -> Self {
+    pub fn new(contract_owner_id: AccountId, metadata: IdeaContractMetadata) -> Self {
         //create a variable of type Self with all the fields initialized. 
         let this = Self {
             //Storage keys with the prefixes used for the collections. This helps avoid data collision
             ideas_by_id: LookupMap::new(StorageKey::IdeasById.try_to_vec().unwrap()),
             ideas_per_owner: LookupMap::new(StorageKey::IdeasPerOwner.try_to_vec().unwrap()),
+            // tags_per_idea: UnorderedMap::new(b"f"),
             investments: UnorderedMap::new(b"d"),
             investment_goal: UnorderedMap::new(b"e"),
             idea_metadata_by_id: UnorderedMap::new(
                 StorageKey::IdeaMetadataById.try_to_vec().unwrap(),
             ),
             //set the owner_id field equal to the passed in owner_id. 
-            owner_id,
+            contract_owner_id,
             metadata: LazyOption::new(
                 StorageKey::IdeaContractMetadata.try_to_vec().unwrap(),
                 Some(&metadata),

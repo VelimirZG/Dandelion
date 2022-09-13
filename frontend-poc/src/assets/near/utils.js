@@ -42,7 +42,7 @@ export function login() {
 
 export async function create_idea(){
   let response = await window.contract.create_idea({
-    args: {idea_id: "Proba 13", receiver_id: "proba.proba8.testnet", investment_goal: 2,metadata: { title: "Treća ideja", description: "Opis ideje", picture_url: "https://bafybeidl4hjbpdr6u6xvlrizwxbrfcyqurzvcnn5xoilmcqbxfbdwrmp5m.ipfs.dweb.link/", team: "Velimir Zagar"}},
+    args: {idea_id: "Proba 13", owner_id: "proba.proba8.testnet", investment_goal: 2,metadata: { title: "Treća ideja", description: "Opis ideje", picture_url: "https://bafybeidl4hjbpdr6u6xvlrizwxbrfcyqurzvcnn5xoilmcqbxfbdwrmp5m.ipfs.dweb.link/", team: "Velimir Zagar"}},
     contractId: 'proba.proba8.testnet'
   })
   return response

@@ -35,4 +35,26 @@ impl Contract {
         self.ideas_per_owner.insert(account_id, &ideas_set);
     }
 
+    // pub(crate) fn internal_add_tag_to_idea(
+    //     &mut self,
+    //     idea_id: &IdeaId,
+    //     tags: &Tag,
+    // ) {
+    //     //get the set of ideas for the given account
+    //     let mut tags_set = self.tags_per_idea.get(idea_id).unwrap_or_else(|| {
+    //         //if the idea doesn't have any tags, we create a new unordered set
+    //         UnorderedSet::new(
+    //             StorageKey::TagsPerIdeaInner
+    //             .try_to_vec()
+    //             .unwrap(),
+    //         )
+    //     });
+
+    //     //we insert the idea ID into the set
+    //     tags_set.insert(tags);
+
+    //     //we insert that set for the given account ID. 
+    //     self.tags_per_idea.insert(idea_id, &tags_set);
+    // }
+
    }

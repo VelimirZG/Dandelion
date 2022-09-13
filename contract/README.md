@@ -24,7 +24,7 @@ export NEARID=AccountID\
    ```near call $NEARID new_default_meta '{"owner_id": "'$NEARID'"}' --accountId $NEARID```
    
 2. **Create first idea:**\
-```near call $NEARID create_idea '{"idea_id": "Idea 1", "receiver_id": "'$NEARID'", "investment_goal" : 2, "metadata": { "title": "First idea", "description": "This is the first idea that we created.", "picture_url": "https://cdn.pixabay.com/photo/2014/12/29/08/29/lens-582605_960_720.jpg", "team": "John Doe"}}' --accountId $NEARID --deposit 0.1```
+```near call $NEARID create_idea '{"idea_id": "Idea 1", "owner_id": "'$NEARID'", "investment_goal" : 2, "metadata": { "title": "First idea", "description": "This is the first idea that we created.", "picture_url": "https://cdn.pixabay.com/photo/2014/12/29/08/29/lens-582605_960_720.jpg", "team": "John Doe"}}' --accountId $NEARID --deposit 0.1```
 
 3. **View idea info**\
 ```near view $NEARID idea_info '{"idea_id": "Idea 1"}'```
