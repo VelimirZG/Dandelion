@@ -48,7 +48,7 @@ export NEARID=AccountID\
 ```near view $NEARID total_investments```
 
 9. **View investment goal**\
-```near view $NEARID get_investment_goal'{"idea_id":"Idea 1"}'```
+```near view $NEARID get_investment_goal '{"idea_id":"Idea 1"}'```
 
 10. **View all ideas**\
 ```near view $NEARID get_all_ideas```
