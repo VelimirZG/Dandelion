@@ -37,6 +37,8 @@ pub struct Contract {
 
     // pub tags_per_idea: UnorderedMap<IdeaId, UnorderedSet<Tag>>,
 
+    pub liked_ideas: LookupMap<AccountId, UnorderedSet<IdeaId>>,
+
     //keeps track of the idea metadata for a given idea ID
     pub idea_metadata_by_id: UnorderedMap<IdeaId, IdeaMetadata>,
 
@@ -55,6 +57,8 @@ pub struct Contract {
 pub enum StorageKey {
     IdeasById,
     IdeasPerOwner,
+    LikedIdeas,
+    LikedIdeasInner { account_id_hash: CryptoHash },
     // TagsPerIdea,
     IdeaMetadataById,
     IdeaContractMetadata,
@@ -87,6 +91,7 @@ impl Contract {
             //Storage keys with the prefixes used for the collections. This helps avoid data collision
             ideas_by_id: LookupMap::new(StorageKey::IdeasById.try_to_vec().unwrap()),
             ideas_per_owner: LookupMap::new(StorageKey::IdeasPerOwner.try_to_vec().unwrap()),
+            liked_ideas: LookupMap::new(StorageKey::LikedIdeas.try_to_vec().unwrap()),
             // tags_per_idea: UnorderedMap::new(b"f"),
             investments: UnorderedMap::new(b"d"),
             investment_goal: UnorderedMap::new(b"e"),

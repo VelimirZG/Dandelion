@@ -35,6 +35,35 @@ impl Contract {
         self.ideas_per_owner.insert(account_id, &ideas_set);
     }
 
+
+    
+        //add a idea to the set of ideas an owner has
+        pub(crate) fn internal_add_liked_idea_to_account(
+            &mut self,
+            account_id: &AccountId,
+            idea_id: &IdeaId,
+        ) {
+            //get the set of ideas for the given account
+            let mut liked_ideas_set = self.liked_ideas.get(account_id).unwrap_or_else(|| {
+                //if the account doesn't have any ideas, we create a new unordered set
+                UnorderedSet::new(
+                    StorageKey::LikedIdeasInner {
+                        //we get a new unique prefix for the collection
+                        account_id_hash: hash_account_id(&account_id),
+                    }
+                    .try_to_vec()
+                    .unwrap(),
+                )
+            });
+    
+            //we insert the idea ID into the set
+            liked_ideas_set.insert(idea_id);
+    
+            //we insert that set for the given account ID. 
+            self.liked_ideas.insert(account_id, &liked_ideas_set);
+        }
+
+        
     // pub(crate) fn internal_add_tag_to_idea(
     //     &mut self,
     //     idea_id: &IdeaId,

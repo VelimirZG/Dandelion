@@ -42,6 +42,38 @@ pub fn ideas_for_owner(
         .collect()
 }
 
+pub fn liked_ideas_for_owner(
+  &self,
+  account_id: AccountId,
+  from_index: Option<U128>,
+  limit: Option<u64>,
+  
+) -> Vec<JsonIdea> {
+  
+  //get the set of ideas for the passed in owner
+  let liked_ideas_for_owner_set = self.liked_ideas.get(&account_id);
+  //if there is some set of ideas, we'll set the ideas variable equal to that set
+  let ideas = if let Some(liked_ideas_for_owner_set) = liked_ideas_for_owner_set {
+    liked_ideas_for_owner_set
+  } else {
+      //if there is no set of ideas, we'll simply return an empty vector. 
+      return vec![];
+  };
+  //where to start pagination - if we have a from_index, we'll use that - otherwise start from 0 index
+  let start = u128::from(from_index.unwrap_or(U128(0)));
+
+  //iterate through the keys vector
+  ideas.iter()
+      //skip to the index we specified in the start variable
+      .skip(start as usize) 
+      //take the first "limit" elements in the vector. If we didn't specify a limit, use 50
+      .take(limit.unwrap_or(50) as usize) 
+      //we'll map the idea IDs which are strings into Json Ideas
+      .map(|idea_id| self.idea_info(idea_id.clone()).unwrap())
+      //since we turned the keys into an iterator, we need to turn it back into a vector to return
+      .collect()
+}
+
 }
 
 

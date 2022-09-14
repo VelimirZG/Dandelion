@@ -42,6 +42,8 @@ impl Contract {
         //call the internal method for adding the idea to the owner
         self.internal_add_idea_to_owner(&idea.owner_id, &idea_id);
 
+       
+
         // self.internal_add_tag_to_idea(&idea_id, &tag);
 
         //calculate the required storage which was the used - initial
@@ -58,5 +60,8 @@ impl Contract {
       
     //   }
 
+    pub fn add_like_to_idea (&mut self, account: AccountId, idea_id: IdeaId,){
+        self.internal_add_liked_idea_to_account(&account, &idea_id);
+    }
 
 }
