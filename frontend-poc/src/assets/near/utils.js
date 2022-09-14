@@ -20,9 +20,9 @@ export async function initContract() {
   // Initializing our contract APIs by contract name and configuration
   window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
     // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['ideas_for_owner', 'idea_info'],
+    viewMethods: ['ideas_for_owner', 'idea_info', 'get_investments', 'total_investments', 'get_all_ideas', 'get_investment_goal', 'get_investment_for_idea'],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['create_idea'],
+    changeMethods: ['create_idea', 'invest'],
   })
 }
 
@@ -56,4 +56,23 @@ export async function ideas_for_owner(){
 export async function idea(){
   const idea = await window.contract.idea_info({idea_id: "Proba 12"})
   return idea
+}
+
+export async function get_investment_for_idea(ideaId){
+  const investments = await window.contract.get_investment_for_idea({idea_id: ideaId})
+  return investments
+}
+
+export async function total_investments(){
+  const total_investments = await window.contract.total_investments()
+  return total_investments
+}
+export async function get_all_ideas(){
+  const all_ideas = await window.contract.get_all_ideas()
+  return all_ideas;
+}
+
+export async function get_investment_goal(ideaId){
+  const inv_goal = await window.contract.get_investment_goal({idea_id: ideaId})
+  return inv_goal;
 }
