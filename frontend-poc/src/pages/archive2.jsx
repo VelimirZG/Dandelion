@@ -7,24 +7,46 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import 'regenerator-runtime/runtime'
 
 import './archive2.css';
-import { create_idea, idea, ideas_for_owner, login } from "../assets/near/utils";
+import { create_idea, idea, ideas_for_owner, login, get_all_ideas, get_investment_goal, total_investments, get_investment_for_idea } from "../assets/near/utils";
+
+
+
 
 const Archive2 = () => {
   
   const [ideas, setIdeas] = useState([]);
+  const ONE_NEAR= 1000000000000000000000000;
 
   useEffect(() => {
-      ideas_for_owner().then( resIdeas => {
-        console.log('ideas from get ideas: ', resIdeas);
-        setIdeas(resIdeas);
-        console.log(resIdeas)
-      });
+    // ideas_for_owner().then( resIdeas => {
+    //   console.log('ideas from get ideas: ', resIdeas);
+    //   setIdeas(resIdeas);
+    //   console.log(resIdeas)
+    // });
 
-      idea().then((single_idea) => {
-        console.log('IDEA:', single_idea);
-      });
-      
-    }, [] )
+    get_all_ideas().then( resIdeas => {
+      console.log('ideas from all ideas: ', resIdeas);
+      get_ideas_info(resIdeas);
+    });
+  }, [] )
+
+
+  async function get_ideas_info(ideas) {
+    for(const element of ideas) {
+      const idea = element;
+      const goal = await get_investment_goal(idea.idea_id)
+      element.inv_goal = goal;
+
+      const inv = await get_investment_for_idea(idea.idea_id)
+      element.inv_total = inv.total_amount / ONE_NEAR;
+
+      const totalInv = await total_investments();
+      element.investors = totalInv;
+    }
+
+    setIdeas(ideas);
+
+  }
   
   return (
     <React.Fragment>
@@ -40,6 +62,7 @@ const Archive2 = () => {
         </button>
     {
       ideas.map((item, id) => {
+        console.log('ITEM: ', item);
         return (<div className="row" key={id}>
           <div className="col-12 mt-3">
             <div className="card">
@@ -48,17 +71,20 @@ const Archive2 = () => {
                     <img className="w-100" src={item.metadata.picture_url} alt="Card image cap" />
                   </div>
                   <div className="card-content d-flex mt-lg-auto flex-column justify-content-center mt-3 col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                    <h4 className="card-title text-center text-md-start text-lg-start">{item.idea_id}</h4>
+                    <h4 className="card-title text-center text-md-start text-lg-start">{item.metadata.title}</h4>
                     <p className="card-text mb-3">
                       {item.metadata.description}
                     </p>
                     <p className="card-tags d-flex justify-content-center align-items-center flex-wrap">
-                        <Button variant="outline-primary" className="mb-2">Primary</Button>
-                        <Button variant="outline-primary" className="ms-2 mb-2">Tag 1</Button>
-                        <Button variant="outline-primary" className="ms-2 mb-2">the bulk</Button>
-                        <Button variant="outline-primary" className="ms-2 mb-2">quick example text</Button>
-                        <Button variant="outline-primary" className="ms-2 mb-2">build</Button>
-                        <Button variant="outline-primary" className="ms-2 mb-2">and make</Button>
+                      {
+                        item.metadata.tags.map((element, i) => {
+                          if(i === 0) {
+                            return (<Button variant="outline-primary" className="mb-2">{element}</Button>);
+                          }else {
+                            return (<Button variant="outline-primary" className="ms-2 mb-2">{element}</Button>);
+                          }
+                        })
+                      }
                         <button className="ms-auto" style={{height: '35px'}}>
                           <HeartFill color="red" size='30px'/>
                         </button>
@@ -68,12 +94,12 @@ const Archive2 = () => {
                     <div className="raised-wrap">
                         <p className="mb-3">Raised</p>
                         <div className="progress">
-                          <div className="progress-bar" style={{ width: "25%"}} role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div className="progress-bar" style={{ width: item.inv_goal / item.inv_total + '%' }} role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div className="supp-wrap d-flex justify-content-between align-items-center mt-3">
                       <p style={{margin: 0}}>Supporters</p>
-                      <Button variant="outline-primary">23</Button>
+                      <Button variant="outline-primary">{item.investors > 0 ? item.investors : 0}</Button>
                     </div>
                     <div className="invest-wrap d-flex justify-content-between mt-3">
                       <Dropdown>

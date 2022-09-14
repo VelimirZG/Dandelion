@@ -54,3 +54,12 @@ export NEARID=AccountID\
 ```near view $NEARID get_all_ideas```
 
 
+
+<<<<<<< HEAD
+```near view $NEARID get_investment_goal '{"idea_id":"125"}'```
+=======
+
+10. **View all ideas**\
+```near view $NEARID get_all_ideas```
+
+
