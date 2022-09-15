@@ -22,7 +22,7 @@ export async function initContract() {
     // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ['ideas_for_owner', 'idea_info', 'get_investments', 'total_investments', 'get_all_ideas', 'get_investment_goal', 'get_investment_for_idea'],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['create_idea', 'invest'],
+    changeMethods: ['create_idea', 'invest', 'add_like_to_idea'],
   })
 }
 
@@ -53,8 +53,8 @@ export async function ideas_for_owner(){
   return owner_ideas
 }
 
-export async function idea(){
-  const idea = await window.contract.idea_info({idea_id: "Proba 12"})
+export async function getIdea(ideaId){
+  const idea = await window.contract.idea_info({idea_id: ideaId})
   return idea
 }
 
@@ -75,4 +75,17 @@ export async function get_all_ideas(){
 export async function get_investment_goal(ideaId){
   const inv_goal = await window.contract.get_investment_goal({idea_id: ideaId})
   return inv_goal;
+}
+
+export async function invest(data){
+  console.log('DATA: ', data);
+  let gas = 300000000000000;
+  const invested = await window.contract.invest({account_id: data.acc, idea_id: data.ideaId}, gas.toLocaleString('fullwide', {useGrouping:false}) , data.value.toLocaleString('fullwide', {useGrouping:false}));
+  return invested;
+}
+
+export async function add_like_to_idea(data){
+  console.log('LIKE DATA: ', data);
+  const likeIdea = await window.contract.add_like_to_idea({account: data.accountId, idea_id: data.ideaId});
+  return likeIdea;
 }
