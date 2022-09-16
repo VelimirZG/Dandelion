@@ -3,19 +3,22 @@ import {withRouter} from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { getIdea, get_investment_for_idea, get_investment_goal } from "../assets/near/utils";
+import { getIdea, get_investment_for_idea, get_investment_goal, login, invest } from "../assets/near/utils";
 import { useState } from "react";
 import { useEffect } from "react";
-
+import Button from 'react-bootstrap/Button';
 
 const Single = (props) => {
 
   const [idea, setIdea] = useState(false);
+  const accountId = window.accountId;
+  console.log(accountId)
+  const [currentInvValue, setCurrentInvValue] = useState(0);
+  const ideaId = props.match.params.ideaId;
 
   const ONE_NEAR= 1000000000000000000000000;
 
-  useEffect(() => {
-    const ideaId = props.match.params.ideaId;
+  useEffect(() => { 
     getIdea(ideaId).then( idea => {
       console.log('idea: ', idea);
       getIdeaInfo(idea);
@@ -29,6 +32,11 @@ const Single = (props) => {
     const inv = await get_investment_for_idea(idea.idea_id)
     idea.inv_total = inv.total_amount / ONE_NEAR;
     setIdea(idea);
+  }
+
+  function investInIdea() {
+
+    invest({value: (currentInvValue * ONE_NEAR), acc: accountId, ideaId: ideaId});
   }
   
   if(idea) {
@@ -46,12 +54,15 @@ const Single = (props) => {
               </div>
               <img className="w-100 mb-3" src={idea.metadata.picture_url} alt="Card image cap" />
               <div>
-                <Tabs defaultActiveKey="excerpt" id="uncontrolled-tab-example" className="mb-3" >
-                  <Tab eventKey="excerpt" title="Excerpt">
-                    <p>{idea.metadata.excerpt}</p>
-                  </Tab>
+                <Tabs defaultActiveKey="description" id="uncontrolled-tab-example" className="mb-3" >
                   <Tab eventKey="description" title="Description">
                     <p>{idea.metadata.description}</p>
+                  </Tab>
+                  <Tab eventKey="competitors" title="Competitors">
+                    <p>{idea.metadata.competitors}</p>
+                  </Tab>
+                  <Tab eventKey="valueProposition" title="Value proposition">
+                    <p>{idea.metadata.value_proposition}</p>
                   </Tab>
                 </Tabs>
               </div>
@@ -60,8 +71,8 @@ const Single = (props) => {
             <div className="card mt-3">
               <div className="card-body">
                 <h6 className="card-subtitle mb-2 text-muted">TOTAL DEPOSITED</h6>
-                <h3 className="fw-bold">{idea.inv_goal} <span className="text-muted">stNEAR</span></h3>
-                <p className="mb-4">~ $842,996.247 USD</p>
+                <h3 className="fw-bold">{idea.inv_goal} <span className="text-muted">NEAR</span></h3>
+                {/* <p className="mb-4">~ $842,996.247 USD</p> */}
                 <div className="row">
                   {/* <div className="col">
                     <p className="text-muted">SUPPORTERS</p>
@@ -84,7 +95,7 @@ const Single = (props) => {
                   <div className="d-flex justify-content-between mb-1">
                     <div className="d-flex justify-content-center align-items-center">
                       <span className="text-success">Goal</span>  
-                      <p className="fw-bold ms-2">{idea.inv_goal} stNEAR</p>
+                      <p className="fw-bold ms-2">{idea.inv_goal} NEAR</p>
                     </div>
                     <div className="d-flex justify-content-center align-items-center">
                       <Badge pill bg="primary">In progress</Badge>
@@ -96,7 +107,17 @@ const Single = (props) => {
                   </div>
               </div>
             </div>
-            <button type="button" className="btn btn-success mt-3">Connect wallet to fund</button>
+            {
+              !accountId ?
+              (<button type="button" className="btn btn-success mt-3" onClick={() => login()  }>Connect wallet to fund</button>)
+              :
+              <div className="invest-wrap d-flex mt-3  justify-content-start align-items-center">
+                <input type="number"  onChange={(event) => setCurrentInvValue(event.target.value)}/>
+                <img src="/near-logo.png" className="ms-2" style={{height: '30px', width: 'auto'}}/>
+                <Button variant="outline-primary ms-auto" onClick={(e) => investInIdea(e)}>INVEST</Button>
+              </div>
+            }
+            
            </div>
         </div>
       </div>     

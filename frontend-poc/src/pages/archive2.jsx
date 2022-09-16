@@ -6,8 +6,11 @@ import { HeartFill } from 'react-bootstrap-icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'regenerator-runtime/runtime'
 
+import { Contract } from 'near-api-js'
+
 import './archive2.css';
-import { create_idea, idea, ideas_for_owner, login, get_all_ideas, get_investment_goal, total_investments, get_investment_for_idea, invest, add_like_to_idea } from "../assets/near/utils";
+import { create_idea, idea, ideas_for_owner, login, get_all_ideas, get_investment_goal, total_investments, get_investment_for_idea, invest, add_like_to_idea, logout } from "../assets/near/utils";
+import Popup from "./popup";
 
 
 
@@ -17,6 +20,8 @@ const Archive2 = () => {
   const [ideas, setIdeas] = useState([]);
   const [currentInvValue, setCurrentInvValue] = useState(0.2);
   const ONE_NEAR= 1000000000000000000000000;
+  const [popupInfo, setPopupInfo] = useState({open: false, msg: ''});
+  const accountId = window.accountId;
 
   useEffect(() => { 
     get_all_ideas().then( resIdeas => {
@@ -43,18 +48,27 @@ const Archive2 = () => {
   }
 
   function investInIdea(event) {
-    const accountId = window.accountId;
-    const ideaId = event.target.getAttribute('data-idea');
-    invest({value: (currentInvValue * ONE_NEAR), acc: accountId, ideaId: ideaId});
+    
+    if(accountId) {
+      const ideaId = event.target.getAttribute('data-idea');
+      invest({value: (currentInvValue * ONE_NEAR), acc: accountId, ideaId: ideaId});
+    }else {
+      setPopupInfo({open: true, msg: 'Please connect wallet to invest into the idea'});
+    }
   }
 
 
   async function likeIdea(event) {
     console.log(event.target);
-    const accountId = window.accountId;
-    const ideaId = event.currentTarget.getAttribute('data-idea');
-    const likedIdea = await add_like_to_idea({ideaId: ideaId, accountId: accountId});
-    console.log('LIKED IDEA: ', likedIdea);
+    
+    if(accountId) {
+      const ideaId = event.currentTarget.getAttribute('data-idea');
+      const likedIdea = await add_like_to_idea({ideaId: ideaId, accountId: accountId});
+      console.log('LIKED IDEA: ', likedIdea);
+    }else {
+      setPopupInfo({open: true, msg: 'Please connect wallet to like the idea'});
+    }
+    
   }
   
   return (
@@ -68,6 +82,10 @@ const Archive2 = () => {
         <button className="link" style={{ float: 'right' }} onClick={()=>create_idea().then((response)=>
         console.log('response from create idea: ', response))}>
           Create ideas
+        </button>
+         <button className="link" style={{ float: 'right' }} onClick={()=>logout().then((response)=>
+        console.log('response from create idea: ', response))}>
+          signout
         </button>
     {
       ideas.map((item, id) => {
@@ -112,6 +130,7 @@ const Archive2 = () => {
                     </div> */}
                     <div className="invest-wrap d-flex mt-3  justify-content-start align-items-center">
                       <select className="form-select" defaultValue={0.2} style={{width: '30%'}} aria-label="Default select example" onChange={(e) => setCurrentInvValue(e.target.value)}>
+                        <option value="0.1">0.1</option>
                         <option value="0.2">0.2</option>
                         <option value="0.5">0.5</option>
                         <option value="1">1</option>
@@ -130,6 +149,10 @@ const Archive2 = () => {
       })
     }
     </div>
+    {
+      popupInfo.open &&
+      <Popup msg={popupInfo.msg} setPopupInfo={setPopupInfo} />
+    }
     </React.Fragment>
     
   );

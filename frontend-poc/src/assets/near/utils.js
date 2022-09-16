@@ -8,8 +8,7 @@ console.log('CONFIG: ', nearConfig);
 export async function initContract() {
   console.log('OBJECT ASSIGN: ', Object.assign({ keyStore: new keyStores.BrowserLocalStorageKeyStore() }, nearConfig));
   const near = await connect(Object.assign({ keyStore: new keyStores.BrowserLocalStorageKeyStore() }, nearConfig))
-  console.log('NEAR: ', near);
-
+  
   // Initializing Wallet based Account. It can work with NEAR testnet wallet that
   // is hosted at https://wallet.testnet.near.org
   window.walletConnection = new WalletConnection(near)
