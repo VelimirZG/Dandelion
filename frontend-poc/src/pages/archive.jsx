@@ -42,7 +42,7 @@ const Card = styled.div`
       display: flex;
 
       .button {
-        font-family: DINX;
+        font-family: PTSerif;
         padding: 15px;
         font-size: 20px;
         max-width: 300px;
@@ -55,7 +55,7 @@ const Card = styled.div`
         padding: 0;
         white-space: nowrap;
         margin: 0;
-        font-family: DINX;
+        font-family: PTSerif;
         font-size: 20px;
         margin-left: 20px;
 
@@ -66,7 +66,7 @@ const Card = styled.div`
           align-items: center;
           justify-content: center;
           font-weight: bold;
-          font-family: DINX;
+          font-family: PTSerif;
           padding: 0 10px;
           text-transform: uppercase;
         }

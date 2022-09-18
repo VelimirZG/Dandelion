@@ -86,12 +86,12 @@ const Archive2 = () => {
           <div className="col-sm-12 col-md-6 col-lg-6 m-auto">
             <h1 className="text-center fw-bolder">Dandelion</h1>
             <h3 className="text-center mt-3">Invest early in world-class creators solving real problems using blockchain technology</h3>
-            <h5 className="text-center fw-light mt-3 mx-auto ">Invest in the projects at the earliest stage possible where the opportunities for value creation are highest. Start investing from as low as 0,1 <img src="/near-logo.png" className="ms-1" style={{height: '15px', width: 'auto'}}/>   (~0,5$)</h5>
+            <h5 className="text-center fw-light mt-3 mx-auto ">Invest in the projects at the earliest stage possible where the opportunities for value creation are highest. Start investing from as low as 0,1 <img src="/near-logo.png" className="ms-1" style={{height: '15px', width: 'auto', display: 'inline-block', 'verticalAlign': 'top', marginTop: '4px'}}/>   (~0,5$)</h5>
           </div>
         </div>
         <div className="row mt-5 d-flex justify-content-center">
           <div className="col-sm-12 col-md-6  col-lg-4 mb-4">
-            <div className="card" style={{padding: '30px'}}>
+            <div className="card h-100" style={{padding: '30px', border: '3px solid #8275FF'}}>
                 <div className="card-body">
                     <h5 className="card-title text-center fw-bold">FOR IDEA GENERATORS</h5>
                     <ul className="mt-4">
@@ -103,7 +103,7 @@ const Archive2 = () => {
             </div>
           </div>
           <div className="col-sm-12 col-md-6 col-lg-4 mb-4">
-            <div className="card" style={{padding: '30px'}}>
+            <div className="card h-100" style={{padding: '30px', border: '3px solid #CF3ED1'}}>
                 <div className="card-body">
                     <h5 className="card-title text-center fw-bold">FOR INVESTORS</h5>
                     <ul className="mt-4">
@@ -117,15 +117,14 @@ const Archive2 = () => {
         </div>
     {
       ideas.map((item, id) => {
-        console.log('ITEM: ', item);
         return (<div className="row" key={id}>
           <div className="col-12 mt-3">
             <div className="card">
                 <div className="card-body d-flex mt-auto flex-sm-column flex-lg-row row">
-                  <div className="col-xs-12 col-sm-12 col-lg-3">
+                  <div className="col-xs-12 col-sm-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <img className="w-100" src={item.metadata.picture_url} alt="Card image cap" />
                   </div>
-                  <div className="card-content d-flex mt-lg-auto flex-column justify-content-center mt-3 col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                  <div className="card-content d-flex mb-lg-auto flex-column justify-content-center mt-3 col-xs-12 col-sm-12 col-md-12 col-lg-7">
                     <h4 className="card-title text-center text-md-start text-lg-start" style={{cursor: 'pointer'}} onClick={() => { window.location.href='/' + item.idea_id}}>{item.metadata.title}</h4>
                     <p className="card-text mb-3">
                       {item.metadata.excerpt}
@@ -157,7 +156,7 @@ const Archive2 = () => {
                       <Button variant="outline-primary">{item.investors > 0 ? item.investors : 0}</Button>
                     </div> */}
                     <div className="invest-wrap d-flex mt-3  justify-content-start align-items-center">
-                      <select className="form-select" defaultValue={0.2} style={{width: '30%'}} aria-label="Default select example" onChange={(e) => setCurrentInvValue(e.target.value)}>
+                      <select className="form-select" defaultValue={0.1} style={{width: '30%'}} aria-label="Default select example" onChange={(e) => setCurrentInvValue(e.target.value)}>
                         <option value="0.1">0.1</option>
                         <option value="0.2">0.2</option>
                         <option value="0.5">0.5</option>

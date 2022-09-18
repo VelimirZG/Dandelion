@@ -32,6 +32,8 @@ const Single = (props) => {
 
     const inv = await get_investment_for_idea(idea.idea_id)
     idea.inv_total = inv.total_amount / ONE_NEAR;
+
+    console.log('PERC: ', ((100 * idea.inv_total) / idea.inv_goal));
     setIdea(idea);
   }
 
@@ -39,6 +41,8 @@ const Single = (props) => {
 
     invest({value: (currentInvValue * ONE_NEAR), acc: accountId, ideaId: ideaId});
   }
+
+  
   
   if(idea) {
     return (
@@ -72,7 +76,7 @@ const Single = (props) => {
            <div className="col d-flex flex-column">
             <div className="card mt-3">
               <div className="card-body">
-                <h6 className="card-subtitle mb-2 text-muted">TOTAL DEPOSITED</h6>
+                <h6 className="card-subtitle mb-2 text-muted">GOAL</h6>
                 <h3 className="fw-bold">{idea.inv_goal} <span className="text-muted">NEAR</span></h3>
                 {/* <p className="mb-4">~ $842,996.247 USD</p> */}
                 <div className="row">
@@ -84,7 +88,7 @@ const Single = (props) => {
                     <p className="text-muted">STATUS</p>
                     <h4 className="fw-bold">
                       {
-                        ((100 * idea.inv_total) / idea.inv_goal ) >= 100 ? 'FINISHED' : 'IN PROGRESS'
+                        Math.round((100 * idea.inv_total) / idea.inv_goal ) >= 100 ? 'FINISHED' : 'IN PROGRESS'
                       }
                     </h4>
                   </div>
@@ -100,7 +104,10 @@ const Single = (props) => {
                       <p className="fw-bold ms-2">{idea.inv_goal} NEAR</p>
                     </div>
                     <div className="d-flex justify-content-center align-items-center">
-                      <Badge pill bg="primary">In progress</Badge>
+                      
+                      {
+                        Math.round((100 * idea.inv_total) / idea.inv_goal ) >= 100 ? <Badge pill bg="primary">Finished</Badge> : <Badge pill bg="primary">In progress</Badge>
+                      }
                       <span className="ms-1 fw-bold">{ ((100 * idea.inv_total) / idea.inv_goal ).toFixed(2) + '%' }</span>
                     </div>
                   </div>

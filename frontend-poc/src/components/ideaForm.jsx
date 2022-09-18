@@ -86,12 +86,30 @@ function IdeaForm(props) {
     formData.append('idea_id', Date.now())
     formData.append('owner_id', window.accountId);
     console.log('FROM DATA: ', formData.entries());
+
+    let metadata = ['title', 'description', 'picture_url', 'team', 'competitors', 'excerpt', 'value_proposition'];
+    let data = {};
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
+      if(metadata.includes(key)) {
+        if(data['metadata']) {
+          data['metadata'][key] = value; 
+        }else {
+          data['metadata'] = {};
+          data['metadata'][key] = value;
+        }
+      }else if(key === 'tags') {
+        let tags = value.split(',');
+        data['metadata'][key] = tags;
+      }else {
+        data[key] = value;
+      }
     }
-    console.log( event.currentTarget);
-    // create_idea().then((response)=>
-    // console.log('response from create idea: ', response))
+    data.investment_goal = parseInt(data.investment_goal);
+    console.log(data);
+    create_idea(data).then((response)=>
+      console.log('response from create idea: ', response)
+    )
   }
   
   return (
@@ -144,8 +162,8 @@ function IdeaForm(props) {
                     <input name="value_proposition" type="text" className="form-control" id="value_proposition" aria-describedby="value_proposition" />
                   </div>
                   <div className="mb-5">
-                    <label className="form-label" htmlFor="picture_url">Upload idea image</label>
-                    <input name="picture_url" type="file" className="form-control" id="picture_url" />
+                    <label className="form-label" htmlFor="picture_url">Idea image file path:</label>
+                    <input name="picture_url" type="url" className="form-control" id="picture_url" />
                   </div>
                   <div className="mb-3 d-flex justify-content-between align-items-center">
                     <button className="btn btn-danger" onClick={(e) => props.setOpenIdeaForm(false)}>CANCEL</button>

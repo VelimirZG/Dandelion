@@ -39,10 +39,10 @@ export function login() {
   window.walletConnection.requestSignIn(nearConfig.contractName)
 }
 
-export async function create_idea(){
+export async function create_idea(data){
   let response = await window.contract.create_idea({
-    args: {idea_id: "Proba 13", owner_id: "proba.proba8.testnet", investment_goal: 2,metadata: { title: "Treća ideja", description: "Opis ideje", picture_url: "https://bafybeidl4hjbpdr6u6xvlrizwxbrfcyqurzvcnn5xoilmcqbxfbdwrmp5m.ipfs.dweb.link/", team: "Velimir Zagar"}},
-    contractId: 'proba.proba8.testnet'
+    args: data,
+    contractId: window.contract.contractId
   })
   return response
 }

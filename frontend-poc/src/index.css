@@ -6,6 +6,10 @@
 } */
 
 
+body {
+  font-family: 'PTSerif', sans-serif !important;
+}
+
 button {
   border: none;
   background-color: transparent;
@@ -22,14 +26,14 @@ h1 {
 }
 
 @font-face {
-  font-family: DINX;
-  src: url("../public/fonts/DINX_Lig_0.otf");
+  font-family: PTSerif;
+  src: url("../public/fonts/PTSerif-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: DINX;
-  src: url("../public/fonts/DINX Bol_0.otf");
+  font-family: PTSerif;
+  src: url("../public/fonts/PTSerif-Bold.ttf");
   font-weight: bold;
   font-style: normal;
 }
