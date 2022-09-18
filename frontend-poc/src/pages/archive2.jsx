@@ -9,8 +9,10 @@ import 'regenerator-runtime/runtime'
 import { Contract } from 'near-api-js'
 
 import './archive2.css';
-import { create_idea, idea, ideas_for_owner, login, get_all_ideas, get_investment_goal, total_investments, get_investment_for_idea, invest, add_like_to_idea, logout } from "../assets/near/utils";
+import { login, get_all_ideas, get_investment_goal, total_investments, get_investment_for_idea, invest, add_like_to_idea, logout } from "../assets/near/utils";
 import Popup from "./popup";
+import IdeaForm from "../components/ideaForm";
+import Navbar from "../components/navbar";
 
 
 
@@ -71,22 +73,48 @@ const Archive2 = () => {
     
   }
   
+  function walletLogout() {
+    logout();
+    console.log('AFTER LOGUT: ', accountId)
+  }
   return (
     <React.Fragment>
-      <div className="container-fluid">
-        <button onClick={()=>login()}>Sign in</button>
-        <button className="link" style={{ float: 'right' }} onClick={()=>ideas_for_owner().then((response)=>
-        console.log('response from create idea: ', response))}>
-          List ideas
-        </button>
-        <button className="link" style={{ float: 'right' }} onClick={()=>create_idea().then((response)=>
-        console.log('response from create idea: ', response))}>
-          Create ideas
-        </button>
-         <button className="link" style={{ float: 'right' }} onClick={()=>logout().then((response)=>
-        console.log('response from create idea: ', response))}>
-          signout
-        </button>
+      
+      <div className="container-fluid p-3">
+        <Navbar />
+        <div className="row mt-5">
+          <div className="col-sm-12 col-md-6 col-lg-6 m-auto">
+            <h1 className="text-center fw-bolder">Dandelion</h1>
+            <h3 className="text-center mt-3">Invest early in world-class creators solving real problems using blockchain technology</h3>
+            <h5 className="text-center fw-light mt-3 mx-auto ">Invest in the projects at the earliest stage possible where the opportunities for value creation are highest. Start investing from as low as 0,1 <img src="/near-logo.png" className="ms-1" style={{height: '15px', width: 'auto'}}/>   (~0,5$)</h5>
+          </div>
+        </div>
+        <div className="row mt-5 d-flex justify-content-center">
+          <div className="col-sm-12 col-md-6  col-lg-4 mb-4">
+            <div className="card" style={{padding: '30px'}}>
+                <div className="card-body">
+                    <h5 className="card-title text-center fw-bold">FOR IDEA GENERATORS</h5>
+                    <ul className="mt-4">
+                      <li className="mt-2">Receive feedback and financials support at a very early stage - from the idea creation</li>
+                      <li className="mt-2">Gain attraction and recognition very fast</li>
+                      <li className="mt-2">Fail proof multiple ideas in short time</li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <div className="card" style={{padding: '30px'}}>
+                <div className="card-body">
+                    <h5 className="card-title text-center fw-bold">FOR INVESTORS</h5>
+                    <ul className="mt-4">
+                      <li className="mt-2">Invest in large number of startups and ideas at a very early stage</li>
+                      <li className="mt-2">Follow up every stage of the project</li>
+                      <li className="mt-2">Become part of the project</li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+        </div>
     {
       ideas.map((item, id) => {
         console.log('ITEM: ', item);

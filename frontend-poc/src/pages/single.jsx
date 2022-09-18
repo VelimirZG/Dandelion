@@ -7,6 +7,7 @@ import { getIdea, get_investment_for_idea, get_investment_goal, login, invest } 
 import { useState } from "react";
 import { useEffect } from "react";
 import Button from 'react-bootstrap/Button';
+import Navbar from "../components/navbar";
 
 const Single = (props) => {
 
@@ -42,6 +43,7 @@ const Single = (props) => {
   if(idea) {
     return (
       <div className="container">
+        <Navbar />
         <div className="row mt-5">
            <div className="col d-flex flex-column">
               <h1 className="mb-3">{idea.metadata.title}</h1>
