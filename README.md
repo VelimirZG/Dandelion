@@ -54,12 +54,11 @@ export NEARID=AccountID\
 ```near view $NEARID get_all_ideas```
 
 
-FRONTEND
+### FRONTEND
 
-Switch to frontend POC
 
 1. **Switch to frontend POC:**\
-   ```cd frontend-poc``
+   ```cd frontend-poc```
 
 In the project directory, you can run:
 
