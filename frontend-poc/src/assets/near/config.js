@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME ||'proba.proba9.testnet'
+const CONTRACT_NAME = process.env.CONTRACT_NAME ||'dandelion_test.testnet'
 
 function getConfig(env) {
   switch (env) {

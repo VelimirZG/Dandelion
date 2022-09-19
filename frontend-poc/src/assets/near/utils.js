@@ -48,7 +48,7 @@ export async function create_idea(data){
 }
 
 export async function ideas_for_owner(){
-  const owner_ideas = await window.contract.ideas_for_owner({account_id: "proba.proba9.testnet"})
+  const owner_ideas = await window.contract.ideas_for_owner({account_id: "dandelion_test.testnet"})
   return owner_ideas
 }
 
