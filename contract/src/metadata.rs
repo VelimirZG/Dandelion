@@ -53,6 +53,7 @@ pub struct IdeaContractMetadata {
 #[derive(Debug)]
 pub struct IdeaMetadata {
     pub title: Option<String>, // ex. "Teleportal" or "Future bank"
+    pub excerpt: Option<String>,
     pub description: Option<String>, // free-form description
     pub competitors: Option<String>,
     pub value_proposition: Option<String>, // unique value proposition

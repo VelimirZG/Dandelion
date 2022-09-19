@@ -4,6 +4,7 @@ import {withRouter, Redirect} from "react-router-dom";
 
 import { login, logout } from "../assets/near/utils";
 import IdeaForm from "./ideaForm";
+import { colors } from "@material-ui/core";
 
 
 
@@ -27,16 +28,16 @@ const Navbar = () => {
       {
         accountId && 
         <div className="col d-flex justify-content-center align-items-center">
-          <button className="btn btn-primary" style={{ float: 'right' }} onClick={()=> setOpenIdeaForm(true)}>
+          <button className="btn btn-primary" style={{ float: 'right', backgroundColor:'white', borderColor:'#8275ff', color: '#8275ff' }} onClick={()=> setOpenIdeaForm(true)}>
               Create idea
           </button>
         </div>
       }
       <div className="col ms-auto">
         {accountId ? 
-          <button className="btn btn-danger" style={{ float: 'right' }} onClick={()=> walletLogout()}>Sign out</button>
+          <button className="btn btn-danger" style={{ float: 'right'}} onClick={()=> walletLogout()}>Disconnect wallet</button>
             :
-          <button className="btn btn-primary" style={{ float: 'right' }} onClick={()=>login()}>Connect wallet</button>
+          <button className="btn btn-primary" style={{ float: 'right', color:'#8275ff', backgroundColor:'white', borderColor:'#8275ff'}} onClick={()=>login()}>Connect wallet</button>
         }
       </div>
       {
