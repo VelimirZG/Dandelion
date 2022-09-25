@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="row d-flex justify-content-center align-items-center">
       <div className="col">
-        <a href={process.env.PUBLIC_URL}>
+        <a href="/">
           <img src={`${process.env.PUBLIC_URL}/logo.png`} className="ms-2" style={{width: 'auto'}}/>
         </a>
       </div>
