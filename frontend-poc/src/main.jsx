@@ -30,7 +30,7 @@ const Main = () => {
   // }
 
   return (
-    <BrowserRouter basename={'/dandelion'} >
+    <BrowserRouter >
       <Route exact path="/" render={() => <Archive2/> } />
       <Route exact path="/:ideaId"  render={() => <Single/> } />
     </BrowserRouter>
