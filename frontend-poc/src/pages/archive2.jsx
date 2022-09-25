@@ -86,7 +86,7 @@ const Archive2 = () => {
           <div className="col-sm-12 col-md-6 col-lg-6 m-auto">
             <h1 className="text-center fw-bolder">Dandelion</h1>
             <h3 className="text-center mt-3">Invest early in world-class creators solving real problems using blockchain technology</h3>
-            <h5 className="text-center fw-light mt-3 mx-auto ">Invest in the projects at the earliest stage possible where the opportunities for value creation are highest. Start investing from as low as 0,1 <img src="/near-logo.png" className="ms-1" style={{height: '15px', width: 'auto', display: 'inline-block', 'verticalAlign': 'top', marginTop: '4px'}}/>   (~0,5$)</h5>
+            <h5 className="text-center fw-light mt-3 mx-auto ">Invest in the projects at the earliest stage possible where the opportunities for value creation are highest. Start investing from as low as 0,1 <img src={`${process.env.PUBLIC_URL}/near-logo.png`} className="ms-1" style={{height: '15px', width: 'auto', display: 'inline-block', 'verticalAlign': 'top', marginTop: '4px'}}/>   (~0,5$)</h5>
           </div>
         </div>
         <div className="row mt-5 d-flex justify-content-center">
@@ -125,7 +125,7 @@ const Archive2 = () => {
                     <img className="w-100" src={item.metadata.picture_url} alt="Card image cap" />
                   </div>
                   <div className="card-content d-flex mb-lg-auto flex-column justify-content-center mt-3 col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                    <h4 className="card-title text-center text-md-start text-lg-start" style={{cursor: 'pointer'}} onClick={() => { window.location.href='/' + item.idea_id}}>{item.metadata.title}</h4>
+                    <h4 className="card-title text-center text-md-start text-lg-start" style={{cursor: 'pointer'}} onClick={() => { window.location.href= process.env.PUBLIC_URL + '/' + item.idea_id}}>{item.metadata.title}</h4>
                     <p className="card-text mb-3">
                       {item.metadata.excerpt}
                     </p>
@@ -165,7 +165,7 @@ const Archive2 = () => {
                         <option value="10">10</option>
                       </select>
                       {/* <p className="me-3 ms-1">NEAR</p> */}
-                      <img src="/near-logo.png" className="ms-2" style={{height: '30px', width: 'auto'}}/>
+                      <img src={`${process.env.PUBLIC_URL}/near-logo.png`} className="ms-2" style={{height: '30px', width: 'auto'}}/>
                       <Button variant="outline-primary ms-auto" data-idea={item.idea_id} onClick={(e) => investInIdea(e)}>INVEST</Button>
                     </div>
                   </div>
