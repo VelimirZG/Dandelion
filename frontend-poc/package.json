@@ -26,7 +26,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
     "regenerator-runtime": "^0.13.9",
+    "sass": "^1.56.1",
     "styled-components": "^5.3.5",
+    "swiper": "^8.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

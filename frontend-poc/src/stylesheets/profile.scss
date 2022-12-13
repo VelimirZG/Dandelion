@@ -1,0 +1,92 @@
+.profile {
+  .title-wrap {
+    margin-bottom: 78px;
+
+    h1 {
+      font-family: 'Titillium Web';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 70px;
+      line-height: 74px;
+      color: #FFFFFF;
+
+      b {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .cards {
+
+    .card {
+      padding: 44px 7px;
+      background: #000000;
+
+      .card-title {
+        font-family: 'Titillium Web';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 60px;
+        text-align: center;
+        margin-bottom: 10px;
+
+        &.near-collected {
+          color: #F9ED32;
+        }
+        &.supporters {
+          color: #EEA91E;
+
+        }
+        &.phases {
+          color: #CE225B;
+        }
+      }
+      .card-subtitle {
+        font-family: 'Titillium Web';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        letter-spacing: 2px;
+        color: #FFFFFF;
+        text-align: center;
+      }
+    }
+  }
+
+  .supporters {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+
+    b {
+      font-weight: 700;
+    }
+  }
+
+  .tag-btn {
+    border: none;
+  }
+
+  .edit-btn {
+    padding: 7px 14px 9px 16px;
+    background: #EAAD25 !important;
+    border-radius: 5px !important;
+    border: none;
+    color: #000000 !important;
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-left: 21px !important;
+    }
+  }
+
+  .projects-wrap {
+    margin-bottom: 135px;
+  }
+}
