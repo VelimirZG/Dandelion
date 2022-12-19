@@ -79,6 +79,15 @@ const Archive2 = () => {
     }
     
   }
+
+  function useHover(styleOnHover, styleOnNotHover = {}) {
+    const [style, setStyle] = React.useState(styleOnNotHover);
+
+    const onMouseEnter = () => setStyle(styleOnHover)
+    const onMouseLeave = () => setStyle(styleOnNotHover)
+
+    return {style, onMouseEnter, onMouseLeave}
+  }
   
   function walletLogout() {
     logout();
@@ -182,7 +191,7 @@ const Archive2 = () => {
                 }}
               >
                 <SwiperSlide >
-                  <div className="card swiper-card-wrap p-1" style={{"backgroundImage": `url("/card-background.png")`}}>
+                  <div className="card swiper-card-wrap p-1" {...useHover({"border": "none", "opacity": "0.8", "borderRadius": "5px", "backgroundImage": "linear-gradient(180deg, rgba(249,237,50,0.80) 0%, rgba(232,165,35,0.80) 27%, rgba(206,34,91,0.80) 67%, rgba(105,62,152,0.80) 100%), url('/preuzmi.png')"}, {"borderRadius": "5px", "border": "none", "backgroundImage": `linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.01) 3%, #000000 74%), url("/preuzmi.png")`})}>
                     <div className="card-body">
                       <div className="card-title">
                         <h5 className="card-title-text">The Input Technology for the Metaverse</h5>
@@ -201,7 +210,7 @@ const Archive2 = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide >
-                  <div className="card swiper-card-wrap p-1" style={{"backgroundImage": `url("/card-background.png")`}}>
+                  <div className="card swiper-card-wrap p-1" {...useHover({"border": "none", "opacity": "0.8", "borderRadius": "5px", "backgroundImage": "linear-gradient(180deg, rgba(249,237,50,0.80) 0%, rgba(232,165,35,0.80) 27%, rgba(206,34,91,0.80) 67%, rgba(105,62,152,0.80) 100%), url('/preuzmi.png')"}, {"borderRadius": "5px", "border": "none", "backgroundImage": `linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.01) 3%, #000000 74%), url("/preuzmi.png")`})}>
                     <div className="card-body">
                       <div className="card-title">
                         <h5 className="card-title-text">The Input Technology for the Metaverse</h5>
@@ -220,7 +229,7 @@ const Archive2 = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide >
-                  <div className="card swiper-card-wrap p-1" style={{"backgroundImage": `url("/card-background.png")`}}>
+                  <div className="card swiper-card-wrap p-1" {...useHover({"border": "none", "opacity": "0.8", "borderRadius": "5px", "backgroundImage": "linear-gradient(180deg, rgba(249,237,50,0.80) 0%, rgba(232,165,35,0.80) 27%, rgba(206,34,91,0.80) 67%, rgba(105,62,152,0.80) 100%), url('/preuzmi.png')"}, {"borderRadius": "5px", "border": "none", "backgroundImage": `linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.01) 3%, #000000 74%), url("/preuzmi.png")`})}>
                     <div className="card-body">
                       <div className="card-title">
                         <h5 className="card-title-text">The Input Technology for the Metaverse</h5>
@@ -239,7 +248,7 @@ const Archive2 = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide >
-                  <div className="card swiper-card-wrap p-1" style={{"backgroundImage": `url("/card-background.png")`}}>
+                  <div className="card swiper-card-wrap p-1" {...useHover({"border": "none", "opacity": "0.8", "borderRadius": "5px", "backgroundImage": "linear-gradient(180deg, rgba(249,237,50,0.80) 0%, rgba(232,165,35,0.80) 27%, rgba(206,34,91,0.80) 67%, rgba(105,62,152,0.80) 100%), url('/preuzmi.png')"}, {"borderRadius": "5px", "border": "none", "backgroundImage": `linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.01) 3%, #000000 74%), url("/preuzmi.png")`})}>
                     <div className="card-body">
                       <div className="card-title">
                         <h5 className="card-title-text">The Input Technology for the Metaverse</h5>
@@ -258,7 +267,7 @@ const Archive2 = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide >
-                  <div className="card swiper-card-wrap p-1" style={{"backgroundImage": `url("/card-background.png")`}}>
+                  <div className="card swiper-card-wrap p-1" {...useHover({"border": "none", "opacity": "0.8", "borderRadius": "5px", "backgroundImage": "linear-gradient(180deg, rgba(249,237,50,0.80) 0%, rgba(232,165,35,0.80) 27%, rgba(206,34,91,0.80) 67%, rgba(105,62,152,0.80) 100%), url('/preuzmi.png')"}, {"borderRadius": "5px", "border": "none", "backgroundImage": `linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.01) 3%, #000000 74%), url("/preuzmi.png")`})}>
                     <div className="card-body">
                       <div className="card-title">
                         <h5 className="card-title-text">The Input Technology for the Metaverse</h5>
@@ -289,8 +298,8 @@ const Archive2 = () => {
                   <div className="col-12 mt-3 card-wrap">
                     <div className="card">
                         <div className="d-flex mt-auto flex-sm-column flex-lg-row row">
-                          <div className="col-xs-12 col-sm-12 col-lg-4 d-flex justify-content-center align-items-center p-0">
-                            <img className="w-100 h-100" src={item.metadata.picture_url} alt="Card image cap" />
+                          <div className="col-xs-12 col-sm-12 col-lg-4 d-flex justify-content-center align-items-center p-0 img-container" style={{backgroundImage: 'url(' + item.metadata.picture_url + ')'}}>
+                            {/* <img className="w-100 h-100" src={item.metadata.picture_url} alt="Card image cap" /> */}
                           </div>
                           <div className="card-content d-flex mb-lg-auto flex-column justify-content-center  col-xs-12 col-sm-12 col-md-12 col-lg-5">
                             <h4 className="card-title text-center text-md-start text-lg-start" style={{cursor: 'pointer'}} onClick={() => { window.location.href= process.env.PUBLIC_URL + '/' + item.idea_id}}>{item.metadata.title}</h4>
@@ -322,7 +331,7 @@ const Archive2 = () => {
                                   </div>
                                 </div>
                                 <div className="progress" style={{backgroundColor: "#313131"}}>
-                                  <div className="progress-bar" style={{ width: ((100 * item.inv_total) / item.inv_goal ) + '%', backgroundColor: "#EEA91E" }} role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                  <div className="progress-bar" style={{ width: ((100 * item.inv_total) / item.inv_goal ) + '%', background: "linear-gradient(142.91deg, #F9ED32 -54.28%, #E8A523 -12.42%, #CE225B 48.56%, #693E98 100%)" }} role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                               {/* <div className="supp-wrap d-flex justify-content-between align-items-center mt-3">

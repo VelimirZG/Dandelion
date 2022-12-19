@@ -74,12 +74,12 @@ const Profile = (props) => {
       <Navbar />
       <div className="container main-wrap">
         <section className="row">
-          <div className="col-5 title-wrap">
+          <div className="col-12 col-lg-5 title-wrap">
             <h1>Welcome, <br/> <b>John Doe Johnson</b></h1>
           </div>
         </section>
         <section className="row cards">
-          <div className="col-4">
+          <div className="col-12 col-lg-4">
             <div className="card">
               <div className="card-content">
                 <h3 className="card-title near-collected">187,000.66544</h3>
@@ -87,7 +87,7 @@ const Profile = (props) => {
               </div>
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-12 col-lg-4">
             <div className="card">
               <div className="card-content">
                 <h3 className="card-title supporters">1.963</h3>
@@ -95,7 +95,7 @@ const Profile = (props) => {
               </div>
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-12 col-lg-4">
             <div className="card">
               <div className="card-content">
                 <h3 className="card-title phases">16/3</h3>
@@ -112,8 +112,8 @@ const Profile = (props) => {
                 <div className="col-12 card-wrap">
                   <div className="card">
                       <div className="d-flex mt-auto flex-sm-column flex-lg-row row">
-                        <div className="col-xs-12 col-sm-12 col-lg-4 d-flex justify-content-center align-items-center p-0">
-                          <img className="w-100 h-100" src={item.metadata.picture_url} alt="Card image cap" />
+                        <div className="col-xs-12 col-sm-12 col-lg-4 d-flex justify-content-center align-items-center p-0 img-container" style={{backgroundImage: 'url(' + item.metadata.picture_url + ')'}}>
+                          {/* <img className="w-100 h-100" src={item.metadata.picture_url} alt="Card image cap" /> */}
                         </div>
                         <div className="card-content d-flex mb-lg-auto flex-column justify-content-center  col-xs-12 col-sm-12 col-md-12 col-lg-5">
                           <h4 className="card-title text-center text-md-start text-lg-start" style={{cursor: 'pointer'}} onClick={() => { window.location.href= process.env.PUBLIC_URL + '/' + item.idea_id}}>{item.metadata.title}</h4>

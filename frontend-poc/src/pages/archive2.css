@@ -2,8 +2,8 @@
   background-image: url('../../public/background.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100% 100%;
-  /* background-position: center; */
+  /* background-size: 100% 100%; */
+  background-position: center;
 }
 .hero-section {
   padding: 0 !important;
@@ -167,12 +167,21 @@
 .progress {
   height: 10px !important;
 }
-.progress-wrap-card:hover .progress-bar {
+.custom-slider-wrap .swiper-slide:hover .progress-bar {
   background-color: #FFFFFF !important;
 }
-.progress-wrap-card:hover .progress {
+.custom-slider-wrap .swiper-slide:hover .progress {
   background-color: #5E2463 !important;
 }
+.custom-slider-wrap .swiper-slide:hover {
+  background: linear-gradient(180deg, #F9ED32 -34.72%, #E8A523 1.83%, #CE225B 55.08%, #693E98 100%);
+  border-radius: 5px;
+}
+
+.custom-slider-wrap .swiper-slide {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) -10.27%, rgba(0, 0, 0, 0.0130849) -6.56%, #000000 73.76%);
+}
+
 .progress-wrap-card p {
   font-family: 'Titillium Web';
   font-style: normal;
@@ -202,7 +211,7 @@
 .projects-wrap {
   position: relative;
 }
-.projects-wrap::before {
+.part-2 .projects-wrap::before {
   background-image: url('../../public/projects.png');
   background-size: 100% 100%;
   display: inline-block;
@@ -213,10 +222,13 @@
   margin-left: -10%;
   top: 0;
   left: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .projects-wrap .card{
-  background-color: #000000;
+  background-color: transparent;
 
 }
 .projects-wrap .card-content {

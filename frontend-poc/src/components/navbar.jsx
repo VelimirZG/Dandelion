@@ -60,14 +60,14 @@ const Navbar = () => {
           </ul>
           {
             !accountId && 
-              <button className="btn header-button" style={{ float: 'right', backgroundColor:'white', borderColor:'#8275ff', color: '#8275ff' }} onClick={()=> setOpenIdeaForm(true)}>
+              <button className="btn header-button create-idea-btn" onClick={()=> setOpenIdeaForm(true)}>
                   Create idea
               </button>
           }
           {accountId ? 
-            <button className="btn btn-danger" style={{ float: 'right'}} onClick={()=> walletLogout()}>Disconnect wallet</button>
+            <button className="btn btn-danger" onClick={()=> walletLogout()}>Disconnect wallet</button>
               :
-            <button className="btn header-button connect-wallet" style={{ float: 'right', color:'#8275ff', backgroundColor:'white', borderColor:'#8275ff'}} onClick={()=>login()}>Connect wallet</button>
+            <button className="btn header-button connect-wallet" onClick={()=>login()}>Connect wallet</button>
           }
         </div>
         {/* <ul id="mobile-menu">
@@ -92,14 +92,14 @@ const Navbar = () => {
 
               {
                 !accountId && 
-                  <button className="btn header-button mb-3" style={{ float: 'right', backgroundColor:'white', borderColor:'#8275ff', color: '#8275ff' }} onClick={()=> setOpenIdeaForm(true)}>
+                  <button className="btn header-button mb-3 create-idea-btn" onClick={()=> setOpenIdeaForm(true)}>
                       Create idea
                   </button>
               }
               {accountId ? 
-                <button className="btn btn-danger" style={{ float: 'right'}} onClick={()=> walletLogout()}>Disconnect wallet</button>
+                <button className="btn btn-danger" onClick={()=> walletLogout()}>Disconnect wallet</button>
                   :
-                <button className="btn header-button connect-wallet" style={{ float: 'right', color:'#8275ff', backgroundColor:'white', borderColor:'#8275ff'}} onClick={()=>login()}>Connect wallet</button>
+                <button className="btn header-button connect-wallet" onClick={()=>login()}>Connect wallet</button>
               }
             </div>
           </ul>

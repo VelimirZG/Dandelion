@@ -56,7 +56,7 @@ const Single = (props) => {
           <div className="row mt-5 first-part-wrap">
             {/* <div className="col-12 col-lg-7 d-flex flex-column "> */}
               <div className="row title-wrap">
-                <div className="col-12 col-lg-7 p-0">
+                <div className="col-12 col-lg-7 d-flex flex-column">
                   <div className="row text-wrap w-100 m-0 mobile-padding">
                     <div className="col-12 col-lg-8">
                       <h1 className="idea-title">{idea.metadata.title}</h1>
@@ -79,7 +79,7 @@ const Single = (props) => {
               
                   <img className="w-100 idea-img" src={idea.metadata.picture_url} alt="Card image cap" />
                 </div>
-                <div className="col-12 col-lg-5 d-flex flex-column p-0 current-status-wrap">
+                <div className="col-12 col-lg-5 d-flex flex-column current-status-wrap">
                   <div className="card">
                     <div className="card-body">
                       <h6 className="card-subtitle">TOTAL DEPOSITED</h6>
@@ -157,7 +157,7 @@ const Single = (props) => {
                                   <p className="goal-goal">125,000 st</p>
                                   <img className="w-100 idea-img" src={`${process.env.PUBLIC_URL}/near-logo-small.png`} alt="" />
                                   {
-                                    Math.round((100 * idea.inv_total) / idea.inv_goal ) >= 100 ? <Button pill className="status-btn me-2" >COMPLETED</Button> : <Button pill className="status-btn me-2" >IN PROGRESS</Button>
+                                    Math.round((100 * idea.inv_total) / idea.inv_goal ) >= 100 ? <Button pill className="status-btn me-2" >COMPLETED</Button> : <Button pill className="status-btn me-2" >COMPLETED</Button>
                                   }
                                   <p className="percentage">100 %</p>
                                 </div>
@@ -252,7 +252,7 @@ const Single = (props) => {
                 </div>
               </div>
               <div className="row description-wrap">
-                <div className="col-12 col-md-12 col-lg-7 p-0">
+                <div className="col-12 col-md-12 col-lg-7">
                   <div className="tab-wrap">
                     <Tabs defaultActiveKey="description" id="uncontrolled-tab-example" >
                       <Tab eventKey="description" title="Description">

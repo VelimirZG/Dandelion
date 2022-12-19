@@ -5,6 +5,7 @@ import Single from "./pages/single";
 import './index.css';
 import Archive2 from "./pages/archive2";
 import Profile from "./pages/profile";
+import GeneralForm from "./components/form";
 
 const Main = () => {
 
